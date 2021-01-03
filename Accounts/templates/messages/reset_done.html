@@ -1,0 +1,7 @@
+{% extends 'layout/message_base.html' %}
+{% block title %}Успешно!{% endblock %}
+{% block header %}Успешно!{% endblock %}
+{% block message %}{{ title }}{% endblock %}
+{% block buttons %}
+<a href="{% url 'main:index' %}"><input class="btn-1" type="button" value="Вернутся на главную"></a>
+{% endblock %}

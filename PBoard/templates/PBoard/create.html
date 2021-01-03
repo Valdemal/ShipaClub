@@ -1,0 +1,25 @@
+{% extends 'layout/add_base.html' %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <label class="naming" for="name">Название:</label>{{ form.name }}<br>
+    {% if form.name.errors %}
+        {% for error in form.name.errors %}
+            <p class="form-error">{{ error|escape }}</p>
+        {% endfor %}
+    {% endif %}
+   
+    <label class="naming" for="rubrics">Рубрика:</label>{{ form.rubric }}
+   <label class="naming" for="photo">Картинка:</label>{{ form.photo }}
+   <label id="ind" for="din" class="naming">Оценка:</label>{{ form.user_score }}<br>
+   {% if form.user_score.errors %}
+   {% for error in form.user_score.errors %}
+       <p class="form-error">{{ error|escape }}</p>
+   {% endfor %}
+   {% endif %} 
+   <label id="pin" class="naming" for="info">Сведения: <br></label>{{ form.info }}
+   <label for="id_show_authorship" class="naming">Указывать авторство</label>{{ form.show_authorship }}<br>
+    <p><button id="add-button" class="sections">Добавить</button></p>
+</form>
+{% endblock %}

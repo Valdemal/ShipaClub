@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'accounts.css' %}">
+</head>
+<body>
+    <a href="javascript:history.back();">&#10094;Назад</a>
+    <section>
+        {% block container %}
+        <div class="container">
+        {% endblock %}
+            <div class="title">{% block header %}{% endblock %}</div>
+            {% block content %}
+            <form action="">
+                <div class="common"> <img class="icon-user icon" src="/media/user.png" alt=""><input class="row" placeholder="Имя пользователя" type="text"> </div> 
+                <div class="common"> <img class="icon" src="/media/password.png" alt=""><input class="row" placeholder="Пароль" type="password"></div>
+                <div class="common"> <input class="btn login" type="button" value="Войти"></div>
+            </form>
+            {% endblock %}
+        </div>
+    </section>
+</body>
+</html>

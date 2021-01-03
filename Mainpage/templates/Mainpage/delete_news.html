@@ -1,0 +1,10 @@
+{% extends 'layout/form_base.html' %}
+
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label class="naming" for="name">Заголовок:</label><input value="{{ news.title }}" type="None" class="sections" id="name" spellcheck="false" maxlength="50" required="" disabled='disabled'><br><br>
+    <label id="pin" class="naming" for="content">Содержание:<br></label><textarea name="info" cols="40" rows="10" id="info" class="sections" maxlength="500" disabled='disabled'>{{ news.content }}</textarea>
+    <p><button id="add-button" class="sections">Удалить новость</button></p>
+  </form>
+{% endblock %}

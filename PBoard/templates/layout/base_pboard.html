@@ -1,0 +1,91 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>    
+    {% block title %}
+		ShipaClub
+	{% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href='{% static "pboard_style.css" %}'>
+	<link rel="icon" href='{% static "img/favicon.ico" %}' type="image/x-icon"/>
+</head>
+<body>
+<div class="wrapper">
+	<a href="{% url 'main:index' %}">
+	<div class = "title"><h1>
+	{% block head %}
+	Shipa Club
+	{% endblock%}
+	<h1></div>
+	</a>
+	<div class="row">
+		<div class = "object sidebar">
+			{% block sidebar %}	
+				<div class = "profile">
+					{% if user.is_authenticated %}
+					<img class="profile-img"
+						{% if user.profile.avatar %}
+							src='{{ user.profile.avatar.url }}'
+						{% else %}
+							src='{% static "img/Unknown.png" %}'
+						{% endif %}>
+					<div class="profile-links-block">
+						<div id="login" class="profile-link">
+							<a href="{% url 'accounts:profile' slug=user.profile.slug %}">{{ user.username }}</a>
+						</div>
+						{% if user.first_name or user.last_name %}
+							<div id="name" class="profile-link">
+								{{ user.first_name }} {{ user.last_name }} 
+							</div>
+						{% endif %}
+						
+					</div>
+					<div class="exit-img-block">
+						<a href="{% url 'accounts:logout' %}">
+						<img class="exit-img hover-item" src='{% static "img/exit.png" %}'>
+						</a>
+					</div>
+					{% else %}
+					<div class="accounts-links">
+					<a class="hover-link" href="{% url 'accounts:login' %}">Войти</a>|<a class="hover-link" href="{% url 'accounts:registration' %}">Регистрация</a>
+					</div>
+					{% endif %}
+				</div>
+	
+			<a href="{% url 'main:index' %}">
+				<div class ="bar">Главная</div>
+			</a>
+			<a href="{% url 'pboard:index' %}">
+				<div class ="bar">Публикации</div>
+			</a>
+			<a href="#">
+				<div class ="bar">Рубрики</div>
+			</a>
+			<a href="#">
+				<div class ="bar">Форум</div>
+			</a>
+			{% endblock %}
+		</div>
+		
+		<div class="object content">
+		<table class="contitle">{% block contitle%}<tr><td>Контайтл
+		</td></tr>{% endblock %}</table>
+			<div class="main">
+				<div class="testblock"></div>
+			{% block content %}
+				Тут будет контент
+			{% endblock %}
+			</div>
+		</div>
+	</div>
+
+	<div class ="object footer">Футер</div>
+</div>
+<script type="text/javascript" src='{% static "js/script.js" %}'></script>
+<script type="text/javascript" src='{% static "js/search.js" %}'></script>
+<script type="text/javascript" src='{% static "js/ajax.js" %}'></script>
+</body>
+</html>

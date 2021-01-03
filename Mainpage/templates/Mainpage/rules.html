@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block head %}
+    {% if user.is_authenticated %}
+        Welcome to the Shipa Club, {{ user.username }}!
+    {% else %}
+        Welcome to the Shipa Club, buddy!
+    {% endif %}
+{% endblock %}
+
+{% block contitle %}<tr> 
+    <td class="contitle-tab"><a href="{% url 'main:about' %}">О проекте</a></td>
+    <td class="contitle-tab"><a href="{% url 'main:index' %}">Новости</a></td>
+    <td class="contitle-tab selected"><a href="{% url 'main:rules' %}">Правила</a></td>
+</tr>{% endblock %}
+{% block content %}
+Правила
+{% endblock %}

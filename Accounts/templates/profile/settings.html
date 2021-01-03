@@ -1,0 +1,8 @@
+{% extends 'layout/profile_base.html' %} {% block main %} Настройки
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label for="first_name">Имя</label>{{ form.first_name }}
+  <label for="last_name">Фамилия</label>{{ form.last_name }}
+  <label for="avatar">Аватар</label>{{ form.avatar }}
+</form>
+{% endblock %}

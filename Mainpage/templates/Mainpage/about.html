@@ -1,0 +1,87 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block head %}
+	{% if user.is_authenticated %}
+	Welcome to the Shipa Club, {{ user.username }}!
+	{% else %}
+	Welcome to the Shipa Club, buddy!
+	{% endif %}
+{% endblock %}
+
+
+{% block contitle %}<tr> 
+    <td class="contitle-tab selected"><a href="{% url 'main:about' %}">О проекте</a></td>
+    <td class="contitle-tab"><a href="{% url 'main:index' %}">Новости</a></td>
+    <td class="contitle-tab"><a href="{% url 'main:rules' %}">Правила</a></td>
+</tr>{% endblock %}
+{% block content %}
+<div class="main-header">Что это за сайт?</div>
+					<div class="main-part">
+							<div class="img-main-part" >
+								<img class="hover-img" src="{{ stacy }}" alt="Стейси">
+							</div>
+							Это сайт предназначен для оценки любых сущностей, поддающихся оценке по 10-бальной шкале. Поначалу сайт задумывался, как тематический - для инцелов, поэтому некоторые аспекты "субкультуры" инцелов все же сохранились, но позже в угоду маштабируемости концепт поменялся.
+							Перед использованием сайта рекомендуем вам заглянуть в раздел "Правила".
+							<div class="img-main-part second">
+								<img class="hover-img" src="{{ chad }}" alt="Чед" onclick="showModal(this)">
+							</div>
+							<h3 style="text-align: center;">История создания</h3>
+							Идея создания этого сайта появилась летом 2019 года. Тогда я полностью закончил изучение основ языка Python и заинтересовался изучением веб-aреймворка Django.
+							Я знал теорию и мне теперь хотелось попрактиковаться, создав что-то "реальное". Нужно также сказать для полноты картины, что в тот период вышел ролик Карины стримерши,
+							в котором она рассказывала про инцелов. Терминология и культура инцелов произвела на меня некое впечатление и они стали предметом наших шуток. 
+							Прогуливаясь вечерами по площади, мы часто оценивали проходивших девушек по 10-бальной шкале. И вот купаясь в лучах летнего солнца после плавания в теплой реке, 
+							я спросил своего товарища Алексея(репера и бывшего инцела):"На какую тематику можно сделать сайт?". Он ответил мне, что неплохо бы сделать сайт на котором можно было бы оценивать девушек.
+							Эта идея сильно меня вдохновила, но как дело дошло до реализации, я застрял на создании регистрации и входа. Проект был заморожен, но почти спустя год, найдя хорошую литературу по Django, я вновь взялся за создание сайта. Будучи единственным разработчиком, я с трудом управлялся с серверной частью и пользовательским интерфейсом одновременно. В тот момент я понял, что мне нужен помощник и идейный товарищ в качестве фронтэндера. Я предложил Максу место в моей команде. И он согласился. Вдвоем было веселее и проект начал развиваться с новым темпом.  С тех пор и начался новый виток в истории ShipaClub.   
+							(Vovanex)
+					</div>
+			
+			<div class="main-header">Отцы основатели</div>
+			<div class="father-container">
+				
+				<div class="father">
+				  <span class="img-span" >
+					<img  src='{{ vovanex }}' class="hover-img" alt='Vovanex'>
+				  </span>
+				  <table  width="485">
+					  <caption><b>Vovanex</b></caption>
+				    <tr>
+						<td><b>Специализация: </b>Back-end Developer</td>
+					</tr>
+					<tr>
+						<td>Придумал, мать вашу, этот сайт!</td>
+				  	</tr>
+				  	
+						
+				  </table>
+				</div>
+				<div class="middleblock"></div>
+				<div class="father">
+				  <span class="img-span">
+					<img src="{{ makson }}" alt='Makson' class="hover-img">
+				  </span>
+				  <table width="366" >
+						<caption><b>Makson</b></caption>
+					<tr>
+						<td><b>Специализация: </b>Front-end Developer</td>
+					</tr>
+					<tr>
+						<td>Скоро сменит этот убогий дизайн.</td>
+					</tr>
+				
+				  </table>
+				</div>
+			  </div>
+			  <div class="main-header">Верховный инцел приветствует!</div>
+				<div class="blog">
+						<div>
+							<video class="blog-video" preload="auto" autoplay loop src="{{ hellovideo }}"></video>
+								<!-- <span class="title-video">Название</span> -->
+				</div>
+            </div>
+            <!-- Модальное окно -->
+            <div id="myModal" class="modal">
+                <span class="close" id="close_img" onclick="document.getElementById('myModal').style.display = 'none'">&times;</span>
+                <h3 id="caption">привет</h3>
+                <img class="modal-content" id='img01'>
+            </div>
+{% endblock %}

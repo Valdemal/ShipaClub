@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить публикацию</title>
+    <link rel="stylesheet" type="text/css" href='{% static "form_style.css" %}'>
+	<link rel="icon" href='{% static "img/favicon.ico" %}' type="image/x-icon"/>
+</head>
+<body>
+    
+    <a href="javascript:history.back();">&#10094;Назад</a>
+    <div class="menu">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+</body>
+</html>

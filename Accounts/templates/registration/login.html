@@ -1,0 +1,19 @@
+{% extends "layout/accounts_base.html" %}
+{% load static %}
+{% block title %}Вход{% endblock title %}
+{% block header %}Вход{% endblock %}
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="common"> <img class="icon-user icon" src="{% static 'img/user.png' %}" alt="">{{ form.username }}</div> 
+    
+    <div class="common"> <img class="icon" src="{% static 'img/password.png' %}" alt="">{{ form.password }}</div>
+    {% if form.errors %}
+        <p class="form-error">Неверное имя пользователя или пароль</p>
+        <p class="form-error"><a href="{% url 'accounts:password_reset' %}">Сбросить пароль</a></p>
+    {% endif %}
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="common"> <input class="btn login" type="submit" value="Войти"></div>
+</form>
+{% endblock content %}

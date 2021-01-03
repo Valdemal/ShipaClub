@@ -1,0 +1,7 @@
+{% extends 'layout/message_base.html' %}
+{% block title %}Что-то пошло не так!{% endblock %}
+{% block header %}Что-то пошло не так!{% endblock %}
+{% block message %}Возможно, ссылка по которой осуществелен переход некорректна.{% endblock %}
+{% block buttons %}
+<a href="{% url 'main:index' %}"><input class="btn-1" type="button" value="Вернутся на главную"></a>
+{% endblock %}

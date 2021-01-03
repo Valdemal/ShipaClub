@@ -1,0 +1,13 @@
+{% extends 'layout/add_base.html' %}
+{% block title %}Удалить публикацию{% endblock %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label class="naming" for="name">Название:</label><input disabled="disabled" value="{{ post.name }}" id="name" class="sections" ><br>
+    <label class="naming" for="rubrics">Рубрика:</label><input disabled="disabled" value="{{ post.rubric }}" id="rubrics" class="sections" >
+    <!-- <label class="naming" for="photo">Картинка:</label><input type="file" name="photo" id="photo" class="sections" >  -->
+    <label id="ind" for="din" class="naming">Оценка:</label><input disabled="disabled" value="{{ post.pk|post_estimations_average|round|default_if_none:'нет оценки' }} " id="din" class="sections" ><br>
+    <label id="pin" class="naming" for="link">Сведения: <br></label><textarea disabled="disabled" class="sections" cols="30" rows="10" id="info">{{ post.info }}</textarea>
+     <p><button id="add-button" class="sections">Удалить</button></p>
+</form>
+{% endblock %}

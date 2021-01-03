@@ -1,0 +1,7 @@
+{% extends 'layout/message_base.html' %}
+{% block title %}Успешно!{% endblock %}
+{% block header %}{{ username }}{% endblock %}
+{% block message %} Вы успешно зарегистрировались на Shipa Club, в настоящий момент Ваша учётная запись ожидает подтверждения. Письмо с инструкциями отправлено по адресу который вы указали при регистрации.{% endblock %}
+{% block buttons %}
+<a href="{% url 'main:index' %}"><input class="btn-1" type="button" value="Вернутся на главную"></a>
+{% endblock %}

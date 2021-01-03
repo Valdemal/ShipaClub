@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'messages.css' %}">
+</head>
+<body>
+<div class="wrapper">
+	<div class="row">
+		<div class="main">
+            <div class="block">
+                <div class="logo"><b>{% block header %}{% endblock %}</b></div>
+                    <div class="text">
+                        <br>{% block message %}Тут должно быть сообщение{% endblock %} <br> <br> 
+                        {% block buttons %}
+                        {% endblock %}
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

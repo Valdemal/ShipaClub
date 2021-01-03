@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ profile.user.username }}</title>
+    <link rel="icon" href="{% static 'img/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'profile.css' %}" >
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-name">
+                <!-- должно проверять онлайн-ли пользователь  -->
+                <img class="img-epic" 
+                {% if profile.user.is_authenticated %}
+                src="{% static 'img/online.png' %}"
+                alt="online"
+                {% endif %}
+                >
+                
+                <span class="text-name">{{ profile.user.username }}</span>
+                {% if profile.user == user and user.is_authenticated %}
+                <a href="{% url 'accounts:logout' %}"> 
+                <img class="exit hover-item" src="{% static 'img/exit.png' %}" alt="exit" re>
+                </a>
+                {% else %}
+                <img class="exit hover-item">
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <section>
+        <div class="section-container">
+            <div class="panel-left">
+                {% if profile.avatar %}
+                <img class="img-user hover-img" src="{{ profile.avatar.url }}" alt="{{ profile.user.username }}">
+                {% else %}
+                <img class="img-user" src="{% static 'img/user.png' %}" alt="anonymous">
+                {% endif %} 
+                <div class="some-prefix">
+                    
+                    {% if profile.user.first_name or profile.user.last_name %}
+                    <span class="prefix">
+                    {{ profile.user.first_name }} {{ profile.user.last_name }} 
+                    </span>
+                    {% endif %}
+                    
+                    {% if profile.user.is_superuser %}
+                    <span class="prefix admin">Администратор</span>
+                    {% elif profile.user.is_staff %}
+                    <span class="prefix moder">Модератор</span>
+                    {% endif %}
+                </div>
+        
+                <div class="nav-profile">
+                    <a href="#"><button class="item-profile">Друзья</button></a>
+                    <a href="#"><button class="item-profile">Отзывы</button></a>
+                    {% if profile.user == user and user.is_authenticated %}
+                    <a href="#"></a><button class="item-profile">Сообщения</button></a>
+                    <a href="#"><button class="item-profile">Настройки</button></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="main">
+            {% block main %}
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate quaerat debitis placeat maxime perspiciatis quidem cum a culpa porro, velit qui corrupti inventore fuga praesentium labore sequi excepturi sit rerum.
+            {% endblock %}
+            </div>
+            <div class="panel-right">
+                <div class="nav-panel">
+                    <a href="{% url 'main:index' %}"><button class="item-panel">Главная</button></a>
+                    <a href="{% url 'pboard:index' %}"><button class="item-panel">Публикаций</button></a>
+                    <a href="#"><button class="item-panel">Рубрики</button></a>
+                    <a href="#"><button class="item-panel">Форум</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Молдальное окно -->
+    <div id="myModal" class="modal">
+        <span class="close" id="close_img" onclick="document.getElementById('myModal').style.display = 'none'">&times;</span>
+        <h3 id="caption">привет</h3>
+        <img class="modal-content" id='img01'>
+    </div>
+</body>
+<script type="text/javascript" src='{% static "js/modal.js" %}'></script>
+</html>

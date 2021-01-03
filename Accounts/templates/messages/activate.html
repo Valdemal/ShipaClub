@@ -1,0 +1,7 @@
+{% autoescape off %}
+Здравствуйте  {{ user.username }}.
+Перейдите по этой ссылке, чтобы подтвердить свой аккаунт на ShipaClub.
+
+http://{{ domain }}{% url 'accounts:activate' uid64=uid token=token %}
+
+{% endautoescape %}

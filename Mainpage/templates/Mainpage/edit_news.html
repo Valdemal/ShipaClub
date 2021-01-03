@@ -1,0 +1,10 @@
+{% extends 'layout/form_base.html' %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label class="naming" for="name">Заголовок:</label>{{ form.title }}<br>
+    <label class="naming" for="image">Изображение:</label>{{ form.image }}
+    <label id="pin" class="naming" for="content">Содержание:<br></label>{{ form.content }}
+    <p><button id="add-button" class="sections">Изменить</button></p>
+  </form>
+{% endblock %}

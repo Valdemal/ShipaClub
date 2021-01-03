@@ -1,0 +1,85 @@
+{% extends 'layout/base_pboard.html' %}
+{% load static %}
+{% block title %}Публикации{% endblock %}
+
+{% block contitle%}<tr>
+    <td>Публикации</td>
+    <td>{% if user.is_authenticated %}
+        <a href="{% url 'pboard:add' %}"><button>&#43; Добавить публикацию</button></a></td>
+        {% endif %}
+    <td><button id="showbutton">&#128269; Поиск по рубрике</button></td>
+</tr>{% endblock %}
+{% block content %}
+<div class="search-block">
+    <input type="text" id="search-input" name="search" placeholder="Поиск по названию" onkeyup="searchByName()" spellcheck="false">
+    <div class="search-icon" >&#128269;</div>
+</div>
+{% if user.is_anonymous %}
+<p>Войдите чтобы оценивать публикации!</p>
+{% endif %}
+{% for p in posts %}
+<div class="post">
+    <div class="post-header">
+        <img class="post-header-img" src='{{ p.rubric.image.url }}' alt="rubric image">
+        <div class="post-header-name"><a href="{% url 'pboard:by_rubric' p.rubric %}">{{ p.rubric.name }}</a></div>
+        {% if user.is_staff or user == p.author  %}
+        <div class="post-delete-button"><a href="{% url 'pboard:delete' pk=p.pk %}">&times;</a></div>
+        {% endif %}
+    </div>
+    <div class="post-main">
+        <div class="post-main-img">
+        <img class="hover-img" src='{{ p.photo.url }}' alt="{{ p.name }}">
+        </div>
+        <div class="post-estimation">
+            <h3>{{ p.name }}</h3>
+            
+            <p>Общая оценка: <span class="estimation-value">{{ p.pk|post_estimations_average|round|default_if_none:'пока нет оценки' }}</span></p>
+            <!-- <p>Оценка друзей: <span class="estimation-value">{{ p.friends }}</span></p> -->
+            {% if user.is_authenticated %}
+            <h3>Ваша оценка:</h3>
+            <div class="range_input_block">
+                <table>
+                    <th>
+                        <td><button class="range_delete_btn">&times;</button></td>
+                        <td><input class="range_input" type="range" min="1" max="10" step="0.1" post_id="{{ p.pk }}"></td>
+                        <td><p class="range_paragraph">5</p></td>
+                    </th>
+                </table>
+            </div>
+            {% endif %}
+            {% if p.show_authorship %}
+            <p>Автор: <a href="{% url 'accounts:profile' slug=p.author.profile.slug %}">{{ p.author.username }}</a></p>
+            {% endif %}
+        </div>
+        <div class="post-info">
+            <h3>Сведения:</h3>
+            <textarea disabled="disabled" cols="30" rows="10">{{ p.info }}</textarea>
+        </div>
+	</div>
+</div>
+{% endfor %}
+<div class="paginator">
+    {% if page.has_previous %}
+    <a href="?page={{ page.previous_page_number }}"><div class="paginator-arrow">&lt;</div></a>
+    {% endif %}
+    {% if page.paginator.num_pages != 1 %}
+    <div class="paginator-number">
+        {{ page.number }}/{{ page.paginator.num_pages }}
+    </div>
+    {% endif %}
+    {% if page.has_next %}
+    <a href="?page={{ page.next_page_number }}"><div class="paginator-arrow">&gt;</div></a>
+    {% endif %} 
+</div>
+<!-- Модальные окна -->
+<div id="RubricModal" class="modal">
+    <span class="close" id="close_rubrics" onclick="document.getElementById('RubricModal').style.display = 'none'">&times;</span>
+    <div class="modal-content">
+    </div>
+</div>
+<div id="myModal" class="modal">
+    <span class="close" id="close_img" onclick="document.getElementById('myModal').style.display = 'none'">&times;</span>
+    <h3 id="caption">привет</h3>
+    <img class="modal-content" id='img01'>
+</div>
+{% endblock %}

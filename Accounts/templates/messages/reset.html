@@ -1,0 +1,9 @@
+{% autoescape off %}
+Здравствуйте  {{ user.username }}.
+Вы отправили запрос на сброс пароля. Чтобы сбросить пароль, пройдите по этой ссылке:
+
+
+http://{{ domain }}{% url 'accounts:password_reset_confirm' uidb64=uid token=token %}
+
+Администрация ShipaClub.
+{% endautoescape %}

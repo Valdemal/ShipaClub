@@ -1,0 +1,42 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block head %}
+    {% if user.is_authenticated %}
+        Welcome to the Shipa Club, {{ user.username }}!
+    {% else %}
+        Welcome to the Shipa Club, buddy!
+    {% endif %}
+{% endblock %}
+
+
+{% block contitle %}
+<tr> 
+    <td class="contitle-tab"><a href="{% url 'main:about' %}">О проекте</a></td>
+    <td class="contitle-tab selected"><a href="{% url 'main:index' %}">Новости</a></td>
+    <td class="contitle-tab"><a href="{% url 'main:rules' %}">Правила</a></td>
+</tr>
+{% endblock %}
+
+{% block content %}
+Эта дичь не работает
+<form method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+    <table>
+        {% for form in formset %}
+
+        <tr >
+            
+            <td colspan="2">{{ form.title }}</td>
+            <td>{{ form.content }}</td>
+            <td>{{ form.image }}</td>
+        
+            <td><td>Удалить</td><td>{{ form.DELETE }}</td></td>
+            
+        </tr>
+
+        {% endfor %}
+    </table>
+    <input type="submit" value="Сохранить">
+</form>
+{% endblock %}
