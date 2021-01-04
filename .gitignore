@@ -1,7 +1,4 @@
 #ignore database
-db.sqlite3
+**/db/sqlite3
 #ignore media files 
-PBoard/media/posts/**
-PBoard/media/rubric/**
-Mainpage/megia/**
-Accounts/megia/avatars/**
+**/media
